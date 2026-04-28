@@ -1,12 +1,10 @@
 <?php
 
-// model
-require 'data.php';
 
-$id = $_REQUEST['id'];
-
-$filter_book = array_filter($books, fn($l) => $l['id'] == $id);
-
-$book = array_pop($filter_book);
+$book = $database->query(
+    query: "select * from books where id = :id",
+    class: Book::class,
+    params: ['id' => $_REQUEST['id']]
+)->fetch();
 
 view("book", compact('book'));

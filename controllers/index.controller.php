@@ -1,6 +1,11 @@
 <?php
+$search = $_REQUEST['search'] ?? '';
 
-$db = new DB();
-$books = $db->books();
+$books = $database->query(
+    query: 'select * from books where title like :search or author like :search or  description like :search',
+    class: Book::class,
+    params: ["search" => "%$search%"]
+)
+    ->fetchAll();
 
 view("index", compact("books"));
