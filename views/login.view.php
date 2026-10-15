@@ -1,31 +1,29 @@
-<!-- <?php
-var_dump($_SESSION['validations']);
-?> -->
+<?php
+?>
 
-<div class="w-full min-h-[50vh] flex items-center justify-center">
-  <div class="max-w-[500px] w-full">
+<div class="w-full min-h-[50vh] gap-4 flex items-center justify-center">
+  <div class="w-full max-w-125">
     <h1 class="text-center tex-black font-bold mb-2 text-2xl">Fazer login</h1>
-    <form class="rounded w-full flex flex-col gap-2 items-center border border-gray-200 p-4">
+    <form class="rounded w-full flex flex-col gap-2 items-center border border-gray-200 p-4" method="post">
       <input name="email" class="w-full focus:outline-none border-b border-b-gray-200 p-2" placeholder="E-mail"
         required />
       <input name="password" class="w-full focus:outline-none border-b border-b-gray-200 p-2" placeholder="senha"
         type="'password" required />
+
       <button class="w-full cursor-pointer bg-blue-700 text-blue-50 py-2 px-8 rounded font-medium" type="submit">
         entrar
       </button>
     </form>
   </div>
 
-  <div class="max-w-[500px] w-full">
+  <div class="w-full max-w-125">
     <h1 class="text-center tex-black font-bold mb-2 text-2xl">Registrar</h1>
     <form class="rounded w-full flex flex-col gap-2 items-center border border-gray-200 p-4" method="post"
       action="/register">
 
-      <?php if (strlen($msg) > 0): ?>
-        <div class="rounded bg-emerald-100 w-full p-4 text-center text-emerald-900">
-          <?= $msg ?>
-        </div>
-      <?php endif; ?>
+      <!-- <div class="rounded bg-emerald-100 w-full p-4 text-center text-emerald-900">
+        <?= $msg ?>
+      </div> -->
 
       <input class="w-full focus:outline-none border-b border-b-gray-200 p-2" placeholder="Nome" name="name" />
       <input class="w-full focus:outline-none border-b border-b-gray-200 p-2" placeholder="E-mail" type="email"
@@ -35,10 +33,10 @@ var_dump($_SESSION['validations']);
       <input class="w-full focus:outline-none border-b border-b-gray-200 p-2" placeholder="senha" type="password"
         name="password" />
 
-      <?php if (isset($_SESSION['validations']) && sizeof($_SESSION['validations'])): ?>
+      <?php if ($validations = flash()->get('validations')): ?>
         <div class="rounded bg-red-100 w-full p-4 text-red-900 font-medium text-sm">
           <ul>
-            <?php foreach ($_SESSION['validations'] as $validation): ?>
+            <?php foreach ($validations as $validation): ?>
               <li>
                 <span class="mr-2"></span>
                 <?= $validation ?>
