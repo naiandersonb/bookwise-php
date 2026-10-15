@@ -5,6 +5,9 @@ class Book
     public $title;
     public $author;
     public $description;
+    public $released_at;
+    public $user_id;
+    public $pages;
 
     public static function make($item)
     {

@@ -1,8 +1,9 @@
 <?php
 
-$config = require("config.php");
+session_start();
 
 require "functions.php";
-require "models/book.php";
-require "database.php";
+require "models/Book.php";
+$config = require("config.php");
+require "Database.php";
 require "routes.php";
