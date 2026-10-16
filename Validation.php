@@ -81,7 +81,6 @@ class Validation
 
   public function isInvalid()
   {
-    // $_SESSION['validations'] = $this->validations;
     flash()->push("validations", $this->validations);
     return sizeof($this->validations) > 0;
   }
