@@ -1,11 +1,9 @@
 <?php
 
 
-$book = $database->query(
-  query: "select * from books where id = :id",
-  class: Book::class,
-  params: ['id' => $_REQUEST['id']]
-)->fetch();
+$book = Book::get($_REQUEST['id']);
+
+// dd($book);
 
 $avaliacoes = $database->query(
   query: "select * from avaliacoes where book_id = :book_id",

@@ -17,14 +17,16 @@
         <li>
           <a href='/'>Explorar</a>
         </li>
-        <li>
-          <a href='/my-books'>Meus Livros</a>
-        </li>
+        <?php if (auth()): ?>
+          <li>
+            <a href='/my-books'>Meus Livros</a>
+          </li>
+        <?php endif; ?>
       </ul>
 
       <ul>
         <li>
-          <?php if (isset($_SESSION['auth'])): ?>
+          <?php if (auth()): ?>
             <div class="flex flex-row items-center gap-4">
               <div class='text-end'>
                 <p>

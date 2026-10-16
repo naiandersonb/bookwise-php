@@ -7,21 +7,9 @@ $soma_notas = round($soma_notas / 5);
 
 $media_notas = str_repeat('⭐', $soma_notas)
   ?>
-
-<div class="border border-gray-200 bg-white p-4 rounded">
-  <a href="/book?id=<?= $book->id; ?>" class="text-xl font-bold hover:underline hover:text-blue-700 text-emerald-950">
-    <?= $book->title; ?>
-  </a>
-  <p class="text-mist-500 italic">
-    <?= $book->author; ?>
-  </p>
-  <div>
-    <?= $media_notas ?> <span class="text-mist-500 italic">(<?= count($avaliacoes) ?> Avaliações)</span>
-  </div>
-  <p class="mt-4 text-sm">
-    <?= $book->description; ?>
-  </p>
-</div>
+<?php
+require 'partials/_livro.php';
+?>
 
 <h2 class="mt-8">Avaliações</h2>
 
@@ -34,7 +22,6 @@ $media_notas = str_repeat('⭐', $soma_notas)
           <?php
           $nota = str_repeat('⭐', $avaliacao->nota)
             ?>
-
           <p class="text-xs">
             <?= $nota ?>
           </p>
@@ -48,7 +35,9 @@ $media_notas = str_repeat('⭐', $soma_notas)
 
   <?php if (auth()): ?>
     <form method="post" action="/criar-avaliacao"
-      class="col-span-2 flex flex-col gap-4 border border-gray-200 p-4 rounded">
+      class="col-span-2 bg-white flex flex-col gap-4 border border-gray-200 p-4 rounded">
+
+      <h2 class="font-bold">Me conte o que achou</h2>
 
       <?php if ($validacoes = flash()->get('validations')): ?>
 
@@ -68,7 +57,7 @@ $media_notas = str_repeat('⭐', $soma_notas)
 
       <?php endif; ?>
 
-      <h2 class="font-bold">Me conte o que achou</h2>
+
 
       <div>
         <label for=" avaliacao">Avaliação</label>
