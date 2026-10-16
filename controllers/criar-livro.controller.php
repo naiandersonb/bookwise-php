@@ -17,13 +17,10 @@ $description = $_POST["description"];
 $released_at = $_POST["released_at"];
 $pages = $_POST["pages"];
 
-$dir = 'images';
-$file = $dir . '/' . basename($_FILES['cover']['name']);
-$extension = pathinfo($_FILES['cover']['tmp_name'], PATHINFO_EXTENSION);
-$randName = md5(uniqid(rand(), true));
-$cover = "$dir/$randName.$extension";
-
-move_uploaded_file($_FILES['cover']['tmp_name'], $cover);
+$novoNome = md5(rand());
+$extensao = pathinfo($_FILES['cover']['name'], PATHINFO_EXTENSION);
+$cover = "images/$novoNome.$extensao";
+move_uploaded_file($_FILES['cover']['tmp_name'], __DIR__ . "/../public/$cover");
 
 
 $validation = Validation::validate([

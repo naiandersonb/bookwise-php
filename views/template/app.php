@@ -48,7 +48,7 @@
   </header>
 
   <main class="px-4 mx-auto mt-8 max-w-5xl">
-    <?php require "views/{$view}.view.php"; ?>
+    <?php require "../views/{$view}.view.php"; ?>
   </main>
 </body>
 
