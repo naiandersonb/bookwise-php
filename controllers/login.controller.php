@@ -12,13 +12,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // 2. fazer consulta no db com os dados[
   $user = $database->query(
     query: "
-    select * from users where email = :email and password = :password",
+    select * from users where email = :email",
     class: User::class,
-    params: compact("email", "password")
+    params: compact("email")
   )->fetch();
 
   // 3. se existir vamos adicioanar sessão o usuário autenticado
   if ($user) {
+    if (!password_verify($_POST['password'], $user->password)) {
+      flash()->push('validations', ['Usuário ou senha não encontrados']);
+      header('location: /login');
+      exit();
+    }
+
     $_SESSION['auth'] = $user;
     flash()->push('msg', 'Seja bem vindo' . $user->name . '!');
     header('location: /');

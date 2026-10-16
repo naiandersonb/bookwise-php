@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $validation = Validation::validate([
     'name' => ['required'],
-    'email' => ['required', 'email', 'confirmed'],
+    'email' => ['required', 'email', 'confirmed', 'unique:users'],
     'password' => ['required', 'min:8', 'max:30']
   ], $_POST);
 
@@ -19,10 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     params: [
       "name" => $_POST['name'],
       "email" => $_POST['email'],
-      'password' => $_POST['password'],
+      'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
     ]
   );
 
   header("location: /login?msg=Registrado com sucesso!");
   exit();
 }
+
+header('location: /login');
+exit();
